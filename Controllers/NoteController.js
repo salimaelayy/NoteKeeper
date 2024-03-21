@@ -1,4 +1,4 @@
-const NoteModel = require('../Models/Note')
+const NoteModel = require('../Models/NoteModel')
 
 
 const getById = async (req, res, next) => {
@@ -19,14 +19,12 @@ const getById = async (req, res, next) => {
       res.status(500).json({ error: 'An error occurred' })
     }
   }
-module.exports ={getById}
-const Note = require('../Models/NoteModel.js');
 
 // Add note
 const addNote = async (req, res) => {
   const { title, content } = req.body;
   try {
-    const newNote = new Note({ title, content });
+    const newNote = new NoteModel({ title, content });
     await newNote.save();
     return res.status(201).json(newNote);
   } catch (err) {
@@ -34,6 +32,18 @@ const addNote = async (req, res) => {
   }
 };
 
+
+const getAll = async (req, res) => {
+  try {
+    const notes = await NoteModel.find()
+    return res.status(201).json({ notes })
+  } catch (error) {
+    return res.status(400).json({ error: error })
+  }
+}
+
 module.exports = {
-  addNote
+  addNote,
+  getById,
+  getAll
 };
