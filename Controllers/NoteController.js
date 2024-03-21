@@ -46,5 +46,4 @@ module.exports = {
   addNote,
   getById,
   getAll
-  
 };
