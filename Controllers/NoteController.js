@@ -42,9 +42,24 @@ const getAll = async (req, res) => {
   }
 }
 
+const deleteNote = async (req, res) => {
+  const noteId = req.params.id;
+  try {
+    const result = await NoteModel.findByIdAndDelete(noteId);
+    if (!result) {
+      return res.status(404).send({ message: 'Note not found' });
+    }
+    res.status(200).send({ message: 'Note deleted successfully' });
+  } catch (e) {
+    console.log('Error:', e);
+    res.status(500).send('Server error');
+  }
+};
+
+
 module.exports = {
   addNote,
   getById,
-  getAll
-  
+  getAll,
+  deleteNote
 };
