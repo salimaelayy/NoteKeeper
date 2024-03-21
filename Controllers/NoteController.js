@@ -1,4 +1,5 @@
 const NoteModel = require('../Models/NoteModel')
+const NoteModel = require('../Models/NoteModel')
 
 
 const getById = async (req, res, next) => {
@@ -24,6 +25,7 @@ const getById = async (req, res, next) => {
 const addNote = async (req, res) => {
   const { title, content } = req.body;
   try {
+    const newNote = new NoteModel({ title, content });
     const newNote = new NoteModel({ title, content });
     await newNote.save();
     return res.status(201).json(newNote);
