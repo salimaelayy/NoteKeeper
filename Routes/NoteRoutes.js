@@ -4,7 +4,7 @@ const NoteController = require('../Controllers/NoteController');
 
 router.get('/:id', NoteController.getById);
 
-router.post('/add', addNote);
+router.post('/add', NoteController.addNote);
 
 
 module.exports = router;
