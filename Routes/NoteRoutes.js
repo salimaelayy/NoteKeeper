@@ -6,6 +6,7 @@ router.get('/:id', NoteController.getById);
 
 router.post('/add', NoteController.addNote);
 
+router.get('/', NoteController.getAll)
 
 module.exports = router;
 

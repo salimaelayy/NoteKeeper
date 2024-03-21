@@ -20,7 +20,6 @@ const getById = async (req, res, next) => {
     }
   }
 
-
 // Add note
 const addNote = async (req, res) => {
   const { title, content } = req.body;
@@ -33,4 +32,19 @@ const addNote = async (req, res) => {
   }
 };
 
-module.exports ={getById,addNote}
+
+const getAll = async (req, res) => {
+  try {
+    const notes = await NoteModel.find()
+    return res.status(201).json({ notes })
+  } catch (error) {
+    return res.status(400).json({ error: error })
+  }
+}
+
+module.exports = {
+  addNote,
+  getById,
+  getAll
+  
+};
