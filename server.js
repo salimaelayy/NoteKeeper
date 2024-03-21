@@ -7,8 +7,9 @@ const DB = require('./config/db.js');
 
 const noteRouter = require('./Routes/NoteRoutes.js')
 
+
 //json middleware
-app.use(express.json())
+app.use(express.json()) 
 
 // connect DB
 const db = new DB(process.env.MONGO_URI)
