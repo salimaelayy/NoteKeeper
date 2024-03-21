@@ -1,7 +1,7 @@
 const NoteModel = require('../Models/Note')
 
 
-const readbyid = async (req, res, next) => {
+const getById = async (req, res, next) => {
     try {
       //get id
       const noteId = req.params.id
@@ -19,3 +19,4 @@ const readbyid = async (req, res, next) => {
       res.status(500).json({ error: 'An error occurred' })
     }
   }
+module.exports ={getById}
