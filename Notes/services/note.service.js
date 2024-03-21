@@ -2,14 +2,14 @@ import { Note } from "../model/note.js";
 export class NoteService {
   Add = (note) => {
     const repository = new Note({
-      title,
-      note,
+      title: note.title,
+      note: note.note,
     });
     return repository.save();
   };
 
   update = async (id, item) => {
-    const result = await Task.findByIdAndUpdate({ _id: id }, item);
+    const result = await Note.findByIdAndUpdate({ _id: id }, item);
     if (result) return this.getOne(id);
     return null;
   };

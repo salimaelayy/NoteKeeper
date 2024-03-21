@@ -64,7 +64,7 @@ route.put("/:id", async (req, res) => {
     const result = await noteController.update(id, body);
     if (result) res.status(200).json(result);
     res.status(404).json();
-  } catch (error) {
+  } catch (err) {
     console.error(err);
     res.status(500).json();
   }
