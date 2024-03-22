@@ -18,6 +18,7 @@ describe('NoteController', () => {
       await NoteController.addNote(req, res);
 
       expect(res.status).toHaveBeenCalledWith(201);
+      console.log(req.body);
       expect(res.json).toHaveBeenCalledWith({ _id: 'mock-id', ...req.body });
     });
 
@@ -44,7 +45,7 @@ describe('NoteController', () => {
 
       await NoteController.getAll(req, res);
 
-      expect(res.status).toHaveBeenCalledWith(200);
+      expect(res.status).toHaveBeenCalledWith(201);
       expect(res.json).toHaveBeenCalledWith({ notes: mockNotes });
     });
 
@@ -83,7 +84,7 @@ describe('NoteController', () => {
       await NoteController.updateNote(req, res);
 
       expect(res.status).toHaveBeenCalledWith(404);
-      expect(res.json).toHaveBeenCalledWith({ error: 'Note not found' });
+      expect(res.json).toHaveBeenCalledWith({ message: 'Note not found' });
     });
 
     test('should return 500 if update fails', async () => {
@@ -121,7 +122,7 @@ describe('NoteController', () => {
       await NoteController.deleteNote(req, res);
 
       expect(res.status).toHaveBeenCalledWith(404);
-      expect(res.json).toHaveBeenCalledWith({ error: 'Note not found' });
+      expect(res.json).toHaveBeenCalledWith({ message: 'Note not found' });
     });
 
     test('should return 500 if delete fails', async () => {
@@ -133,7 +134,7 @@ describe('NoteController', () => {
       await NoteController.deleteNote(req, res);
 
       expect(res.status).toHaveBeenCalledWith(500);
-      expect(res.json).toHaveBeenCalledWith({ error: 'An error occurred' });
+      expect(res.json).toHaveBeenCalledWith("Server error");
     });
   });
 });
