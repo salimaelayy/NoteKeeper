@@ -13,7 +13,7 @@ const getById = async (req, res, next) => {
         return
       }
   
-      res.json({ data: note })
+      res.status(200).json({ data: note })
     } catch (error) {
       console.error(error)
       res.status(500).json({ error: 'An error occurred' })
@@ -38,7 +38,7 @@ const getAll = async (req, res) => {
     const notes = await NoteModel.find()
     return res.status(201).json({ notes })
   } catch (error) {
-    return res.status(400).json({ error: error })
+    return res.status(400).json({ error: "Failed to fetch notes" })
   }
 }
 
@@ -49,7 +49,7 @@ const updateNote = async (req, res) => {
   try {
       const updatedNote = await NoteModel.findByIdAndUpdate(noteId, { title, content }, { new: true });
       if (!updatedNote) {
-          return res.status(404).send({ message: 'Note not found' });
+          return res.status(404).json({ message: 'Note not found' });
       }
       res.status(200).json({ data: updatedNote });
   } catch (error) {
@@ -62,12 +62,12 @@ const deleteNote = async (req, res) => {
   try {
     const result = await NoteModel.findByIdAndDelete(noteId);
     if (!result) {
-      return res.status(404).send({ message: 'Note not found' });
+      return res.status(404).json({ message: 'Note not found' });
     }
-    res.status(200).send({ message: 'Note deleted successfully' });
+    res.status(200).json({ message: 'Note deleted successfully' });
   } catch (e) {
     console.log('Error:', e);
-    res.status(500).send('Server error');
+    res.status(500).json('Server error');
   }
 };
 
