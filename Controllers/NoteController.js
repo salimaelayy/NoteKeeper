@@ -42,8 +42,40 @@ const getAll = async (req, res) => {
   }
 }
 
+//update
+const updateNote = async (req, res) => {
+  const { title, content } = req.body;
+  const noteId = req.params.id;
+  try {
+      const updatedNote = await NoteModel.findByIdAndUpdate(noteId, { title, content }, { new: true });
+      if (!updatedNote) {
+          return res.status(404).send({ message: 'Note not found' });
+      }
+      res.status(200).json({ data: updatedNote });
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'An error occurred' });
+  }
+};
+const deleteNote = async (req, res) => {
+  const noteId = req.params.id;
+  try {
+    const result = await NoteModel.findByIdAndDelete(noteId);
+    if (!result) {
+      return res.status(404).send({ message: 'Note not found' });
+    }
+    res.status(200).send({ message: 'Note deleted successfully' });
+  } catch (e) {
+    console.log('Error:', e);
+    res.status(500).send('Server error');
+  }
+};
+
+
 module.exports = {
   addNote,
   getById,
-  getAll
+  getAll,
+  updateNote,
+  deleteNote
 };
