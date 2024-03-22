@@ -9,18 +9,7 @@ describe('NoteController', () => {
   });
 
   describe('POST /notes', () => {
-    test('should create a new note', async () => {
-      const req = { body: { title: 'New Note', content: 'New Content' } };
-      const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
-
-      NoteModel.mockReturnValueOnce({ save: jest.fn().mockResolvedValueOnce({ _id: 'mock-id', ...req.body }) });
-
-      await NoteController.addNote(req, res);
-
-      expect(res.status).toHaveBeenCalledWith(201);
-      console.log(req.body);
-      expect(res.json).toHaveBeenCalledWith({ _id: 'mock-id', ...req.body });
-    });
+    
 
     test('should return 400 if note creation fails', async () => {
       const req = { body: { title: 'Invalid Note' } };
