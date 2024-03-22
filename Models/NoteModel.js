@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
-
+const defaultInspect = require('util').inspect;
+const inspect = require('util').inspect;
+inspect = inspect ? inspect : defaultInspect;
 const NoteSchema = new mongoose.Schema({
   title: {
     type: String,
