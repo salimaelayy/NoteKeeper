@@ -1,8 +1,5 @@
 {
   "name": "notekeeper",
-  "jest":{
-    "verbose": true
-  },
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -21,6 +18,9 @@
     "nodemon": "^3.1.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.24.3",
+    "@babel/preset-env": "^7.24.3",
+    "babel-jest": "^29.7.0",
     "jest": "^29.7.0",
     "supertest": "^6.3.4"
   },
